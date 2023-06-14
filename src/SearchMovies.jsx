@@ -15,10 +15,12 @@ function SearchMovies() {
       const data = await res.json();
 
       if (res.ok) {
-        setMovies(data.results);
-        setError("");
-      } else {
-        setError("Error occurred. Please try again.");
+        if (data.results.length === 0) {
+          setError("No movies found. Please try a different search term.");
+        } else {
+          setMovies(data.results);
+          setError("");
+        }
       }
     } catch (err) {
       console.error(err);
@@ -28,24 +30,24 @@ function SearchMovies() {
 
   return (
     <React.Fragment>
-    <form className="form" onSubmit={searchMovies}>
-      <label className="label" htmlFor="query">
-        Movie Name
-      </label>
-      <input
-        className="input"
-        type="text"
-        name="query"
-        placeholder="i.e. Jurassic Park"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-      />
-      <button className="button" type="submit">
-        Search
-      </button>
-    </form>
+      <form className="form" onSubmit={searchMovies}>
+        <label className="label" htmlFor="query">
+          Movie Name
+        </label>
+        <input
+          className="input"
+          type="text"
+          name="query"
+          placeholder="i.e. Jurassic Park"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+        />
+        <button className="button" type="submit">
+          Search
+        </button>
+      </form>
 
-    {error && <p className="error">{error}</p>}
+      {error && <p className="error">{error}</p>}
 
       <div className="card-list">
         {movies

@@ -68,8 +68,11 @@ small {
 
 .error {
   color: red;
-  margin-top: 10px;
+  font-size: 3rem;
+  text-align: center;
+  margin-top: 6rem;
 }
+
 
 @media (min-width: 786px) {
   .form {
